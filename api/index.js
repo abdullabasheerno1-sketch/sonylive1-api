@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const targetUrl = "https://dlive.sx/stream/stream-808.php";
+  const targetUrl = "https://daddyliveplayer.st/premiumtv/daddy.php?id=808";
 
   try {
     const response = await fetch(targetUrl, {
@@ -9,13 +9,15 @@ export default async function handler(req, res) {
       }
     });
 
-    const html = await response.text();
+    let html = await response.text();
     
-    // ടെക്സ്റ്റ് ആയി ഔട്ട്പുട്ട് കാണാൻ വേണ്ടി പ്ലെയിൻ ടെക്സ്റ്റ് ആയി സെറ്റ് ചെയ്യുന്നു
+    // അസ്സറ്റുകൾ കറക്റ്റ് ആയി ലോഡ് ചെയ്യാൻ ബേസ് ടാഗ് നൽകുന്നു
+    html = html.replace('<head>', '<head><base href="https://daddyliveplayer.st/">');
+
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Content-Type', 'text/html');
     res.status(200).send(html);
   } catch (error) {
-    res.status(500).send("Error fetching page source");
+    res.status(500).send("Error loading player");
   }
 }
