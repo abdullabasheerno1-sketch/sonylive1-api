@@ -9,15 +9,13 @@ export default async function handler(req, res) {
       }
     });
 
-    let html = await response.text();
+    const html = await response.text();
     
-    // വെബ്‌സൈറ്റിലെ അസ്സറ്റുകൾ കറക്റ്റ് ആയി ലോഡ് ആകാൻ ബേസ് ടാഗ് ചേർക്കുന്നു
-    html = html.replace('<head>', '<head><base href="https://dlive.sx/">');
-
+    // ടെക്സ്റ്റ് ആയി ഔട്ട്പുട്ട് കാണാൻ വേണ്ടി പ്ലെയിൻ ടെക്സ്റ്റ് ആയി സെറ്റ് ചെയ്യുന്നു
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.status(200).send(html);
   } catch (error) {
-    res.status(500).send("Error fetching stream page");
+    res.status(500).send("Error fetching page source");
   }
 }
