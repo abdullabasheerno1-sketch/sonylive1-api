@@ -1,8 +1,0 @@
-{
-  "routes": [
-    {
-      "src": "/api/sonyliv",
-      "dest": "/api/index.js"
-    }
-  ]
-}
